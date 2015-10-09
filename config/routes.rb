@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   post 'welcome/upload'
   get 'welcome/download'
   get 'welcome/show'
+  get 'welcome/remove_file'
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -7,8 +7,13 @@ class WelcomeController < ApplicationController
   def show
   end
 
+  # def remove_file
+  #   return redirect_to root_path
+  # end
+
   def download
-    send_file "#{Rails.root}/public/#{session[:file_name]}"
+    send_data "#{Rails.root}/public/#{session[:file_name]}"
+    File.delete(File.join(Rails.root, 'public', session[:file_name]))
   end
 
   def upload
@@ -16,8 +21,6 @@ class WelcomeController < ApplicationController
     text = file.read
     file_type = file.path.split(".")[-1]
     file_name = params[:file].original_filename
-
-    p params[:commit]
 
     if file_type == 'rb' && params['uncomment']
       p "MADE IT"
