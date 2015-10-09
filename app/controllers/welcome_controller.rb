@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
 
   def download
     send_data "#{Rails.root}/public/#{session[:file_name]}"
-    File.delete(File.join(Rails.root, 'public', session[:file_name]))
+    DeleteFileJob.perform_later(session[:file_name])
   end
 
   def upload
