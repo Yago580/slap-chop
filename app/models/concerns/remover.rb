@@ -7,11 +7,11 @@ module Remover
     get_accepted_content(string.split("\n"), Regexp.new('//.+$'))
   end
 
-  def self.unlog_rb
-    get_accepted_content(string.split("\n"), Regexp.new('(p |print |put ).+$'))
+  def self.unlog_rb(string)
+    get_accepted_content(string.split("\n"), Regexp.new('(p |print |puts ).*$'))
   end
 
-  def self.unlog_js
+  def self.unlog_js(string)
     get_accepted_content(string.split("\n"), Regexp.new('console\.log.+$'))
   end
 

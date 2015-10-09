@@ -1,4 +1,5 @@
 <%= form_tag({action: :upload}, multipart: true) do %>
   <%= file_field_tag 'file' %>
-  <%= submit_tag %>
+  <%= submit_tag 'uncomment', name: 'uncomment' %>
+  <%= submit_tag 'unlog', name: 'unlog' %>
 <% end %>

@@ -17,10 +17,17 @@ class WelcomeController < ApplicationController
     file_type = file.path.split(".")[-1]
     file_name = params[:file].original_filename
 
-    if file_type == 'rb'
+    p params[:commit]
+
+    if file_type == 'rb' && params['uncomment']
+      p "MADE IT"
       content = Remover.uncomment_rb(text)
-    elsif file_type == 'js'
+    elsif file_type == 'rb' && params['unlog']
+      content = Remover.unlog_rb(text)
+    elsif file_type == 'js' && params['uncomment']
       content = Remover.uncomment_js(text)
+    elsif file_type == 'js' && params['unlog']
+      content = Remover.unlog_js(text)
     end
 
     File.new(File.join(Rails.root, 'public', file_name), 'w')
