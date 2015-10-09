@@ -1,27 +1,34 @@
 class WelcomeController < ApplicationController
-  def index
+  protect_from_forgery except: :download
 
+  def index
   end
 
   def show
-
   end
 
   def download
-    send_file "#{Rails.root}/public/bullshit.rb"
+    p @file_name = session['file_name']
+    send_file "#{Rails.root}/public/#{@file_name}"
   end
 
   def upload
     file = params['file'].tempfile
     text = file.read
-    content = Remover.uncomment_rb(text)
+    file_type = file.path.split(".")[-1]
 
+    if file_type == 'rb'
+      content = Remover.uncomment_rb(text)
+    elsif file_type == 'js'
+      content = Remover.uncomment_js(text)
+    end
 
-    File.new(File.join(Rails.root, 'public', 'bullshit.rb'), 'w')
-    File.open(File.join(Rails.root, 'public', 'bullshit.rb'), 'w') do |f|
+    File.new(File.join(Rails.root, 'public', 'bullshit.'+file_type), 'w')
+    File.open(File.join(Rails.root, 'public', 'bullshit.'+file_type), 'w') do |f|
       content.each {|line| f.puts line }
     end
-    
+
+    session['file_name'] = 'bullshit.'+file_type
     redirect_to welcome_show_path
   end
 end
