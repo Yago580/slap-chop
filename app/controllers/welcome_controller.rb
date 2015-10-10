@@ -18,19 +18,15 @@ class WelcomeController < ApplicationController
     file_type = file.path.split(".")[-1]
     file_name = params[:file].original_filename
 
-    content = removal_type(file_type, text)
-
-    File.new(File.join(Rails.root, 'public', file_name), 'w')
-    File.open(File.join(Rails.root, 'public', file_name), 'w') do |f|
-      content.each {|line| f.puts line }
-    end
+    content = accepted_content(file_type, text)
+    write_to_file(content, file_name)
 
     session[:file_name] = file_name
     redirect_to welcome_show_path
   end
 
   private
-    def removal_type(suffix, text)
+    def accepted_content(suffix, text)
       if suffix == 'rb' && params['uncomment']
         return Remover.uncomment_rb(text)
       elsif suffix == 'rb' && params['unlog']
@@ -39,6 +35,13 @@ class WelcomeController < ApplicationController
         return Remover.uncomment_js(text)
       elsif suffix == 'js' && params['unlog']
         return Remover.unlog_js(text)
+      end
+    end
+
+    def write_to_file(content, filename)
+      File.new(File.join(Rails.root, 'public', filename), 'w')
+      File.open(File.join(Rails.root, 'public', filename), 'w') do |f|
+        content.each {|line| f.puts line }
       end
     end
 end
