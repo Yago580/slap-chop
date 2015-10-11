@@ -10,10 +10,10 @@ module Remover
   private
     def self.patterns
       {
-        'uncomment.rb' => Regexp.new('#.*'),
+        'uncomment.rb' => Regexp.new('#.*$'),
         'uncomment.js' => Regexp.new('//.*$|/\*(.|\s)*\*/'),
         'unlog.rb'     => Regexp.new('(p |print |puts ).*$'),
-        'unlog.js'     => Regexp.new('console\.log.+$')
+        'unlog.js'     => Regexp.new('console\.log\(.*\); ?')
       }
     end
 end
