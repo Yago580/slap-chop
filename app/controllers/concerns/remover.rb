@@ -11,7 +11,7 @@ module Remover
     def self.patterns
       {
         'uncomment.rb' => Regexp.new('#.*'),
-        'uncomment.js' => Regexp.new('//.+$'),
+        'uncomment.js' => Regexp.new('//.*$|/\*.*|\*/'),
         'unlog.rb'     => Regexp.new('(p |print |puts ).*$'),
         'unlog.js'     => Regexp.new('console\.log.+$')
       }
