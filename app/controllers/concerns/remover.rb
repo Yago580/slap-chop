@@ -4,7 +4,7 @@ module Remover
   end
 
   def self.get_content(pattern, string)
-    string.split("\n").reject {|line| line =~ pattern}
+    uncommented = string.split("\n").map {|line| line.gsub(pattern, "")}.compact
   end
 
   private
