@@ -1,9 +1,9 @@
 module Remover
   def self.remove_content(pattern, string)
-    get_content(patterns[pattern], string)
+    filter_content(patterns[pattern], string)
   end
 
-  def self.get_content(pattern, string)
+  def self.filter_content(pattern, string)
     string.gsub(pattern, "").split("\n")
   end
 
