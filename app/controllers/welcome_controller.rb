@@ -27,15 +27,8 @@ class WelcomeController < ApplicationController
 
   private
     def accepted_content(suffix, text)
-      if suffix == 'rb' && params['uncomment']
-        return Remover.uncomment_rb(text)
-      elsif suffix == 'rb' && params['unlog']
-        return Remover.unlog_rb(text)
-      elsif suffix == 'js' && params['uncomment']
-        return Remover.uncomment_js(text)
-      elsif suffix == 'js' && params['unlog']
-        return Remover.unlog_js(text)
-      end
+      pattern = params['removal_type']+'_'+suffix
+      Remover.remove_content(pattern, text)
     end
 
     def write_to_file(content, filename)
