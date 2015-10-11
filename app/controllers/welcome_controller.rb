@@ -2,28 +2,28 @@ class WelcomeController < ApplicationController
   protect_from_forgery except: :download
 
   def index
-    DeleteFileJob.perform_later
+    DeleteFileJob.perform_later # get rid of uploaded files
   end
 
   def upload
-    original = params[:file].original_filename
+    filename = params[:file].original_filename
     pathname = Pathname.new(params[:file].tempfile)
-    content = accepted_content(pathname.extname, pathname.read)
+    results  = filter_content(pathname.extname, pathname.read)
     
-    write_to_file(content, original)
-    send_file path_for(original)
+    write_to_file(results, filename)
+    send_file path_for(filename)
   end
 
   private
-    def accepted_content(suffix, text)
+    def filter_content(suffix, text)
       pattern = params['removal_type']+suffix
       Remover.remove_content(pattern, text)
     end
 
-    def write_to_file(content, filename)
+    def write_to_file(text, filename)
       File.new(path_for(filename), 'w')
       File.open(path_for(filename), 'w') do |f|
-        content.each {|line| f.puts line }
+        text.each {|line| f.puts line }
       end
     end
 
