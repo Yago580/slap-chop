@@ -5,36 +5,29 @@ class WelcomeController < ApplicationController
     DeleteFileJob.perform_later
   end
 
-  def show
-  end
-
-  def download
-    send_file "#{Rails.root}/public/#{session[:file_name]}"
-  end
-
   def upload
-    file = params[:file].tempfile
-    text = file.read
-    file_type = file.path.split(".")[-1]
-    file_name = params[:file].original_filename
-
-    content = accepted_content(file_type, text)
-    write_to_file(content, file_name)
-
-    session[:file_name] = file_name
-    redirect_to welcome_show_path
+    original = params[:file].original_filename
+    pathname = Pathname.new(params[:file].tempfile)
+    content = accepted_content(pathname.extname, pathname.read)
+    
+    write_to_file(content, original)
+    send_file path_for(original)
   end
 
   private
     def accepted_content(suffix, text)
-      pattern = params['removal_type']+'_'+suffix
+      pattern = params['removal_type']+suffix
       Remover.remove_content(pattern, text)
     end
 
     def write_to_file(content, filename)
-      File.new(File.join(Rails.root, 'public', filename), 'w')
-      File.open(File.join(Rails.root, 'public', filename), 'w') do |f|
+      File.new(path_for(filename), 'w')
+      File.open(path_for(filename), 'w') do |f|
         content.each {|line| f.puts line }
       end
+    end
+
+    def path_for(filename)
+      File.join(Rails.root, 'public', filename)
     end
 end
