@@ -4,16 +4,16 @@ module Remover
   end
 
   def self.get_content(pattern, string)
-    string.split("\n").reject {|line| line =~ pattern}
+    string.gsub(pattern, "").split("\n")
   end
 
   private
     def self.patterns
       {
-        'uncomment.rb' => Regexp.new('#.*'),
-        'uncomment.js' => Regexp.new('//.+$'),
+        'uncomment.rb' => Regexp.new('#.*$|^=begin(.|\s)*^=end'),
+        'uncomment.js' => Regexp.new('//.*$|/\*(.|\s)*\*/'),
         'unlog.rb'     => Regexp.new('(p |print |puts ).*$'),
-        'unlog.js'     => Regexp.new('console\.log.+$')
+        'unlog.js'     => Regexp.new('console\.log\(.*\); ?')
       }
     end
 end
