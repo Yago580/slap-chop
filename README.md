@@ -18,6 +18,7 @@ If you would like to add a regular expression for removing comments/logs from fi
 
 ### An example of an added regexp
 ```ruby
+  # app/controllers/concerns/remover.rb
   def self.patterns
     {
       'uncomment.rb' => Regexp.new('#.*$|^=begin(.|\s)*^=end'),
