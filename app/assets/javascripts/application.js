@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+function displayFilename() {
+  var path = $(event.target).val().split('\\');
+  $('#uploadFile').attr('placeholder', path[path.length - 1]);  
+}
+
+function upload() {
+  $('#file').trigger('click');
+}
+
+function uncomment() {
+  $('#uncomment').trigger('click');
+}
+
+function unlog() {
+  $('#unlog').trigger('click');
+}
