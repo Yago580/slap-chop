@@ -1,5 +1,4 @@
 class WelcomeController < ApplicationController
-  protect_from_forgery except: :download
 
   def index
     DeleteFileJob.perform_later # get rid of uploaded files
