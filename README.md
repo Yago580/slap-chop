@@ -30,6 +30,9 @@ If you would like to add a regular expression for removing comments/logs from fi
   end
 ```
 
+#### Stretch
+It would be amazing to be able to upload a rails project directory and recursively remove all comments/logs from all its .rb and .js files. I have been able to zip and unzip uploaded directories but am having trouble figuring out how to zip nested directories in order to send a .zip file back to the user. It would be amazing to get this feature working, I could really use that functionality!
+
 
 
 
