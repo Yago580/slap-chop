@@ -23,7 +23,7 @@ If you would like to add a regular expression for removing comments/logs from fi
       'uncomment.rb' => Regexp.new('#.*$|^=begin(.|\s)*^=end'),
       'uncomment.js' => Regexp.new('//.*$|/\*(.|\s)*\*/'),
       'unlog.rb'     => Regexp.new('(p |print |puts ).*$'),
-      'unlog.js'     => Regexp.new('console\.log\(.*\); ?')
+      'unlog.js'     => Regexp.new('console\.log\(.*\); ?'),
       #c++
       'unlog.cpp'    => Regexp.new('<corresponding regexp here>')
     }
