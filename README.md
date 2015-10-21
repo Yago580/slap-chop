@@ -9,10 +9,8 @@ But there's more. If you select the **unlog** option, Slap Chop will remove all 
 
 # Contributing to Slap Chop
 
-Slap Chop currently supports uncommenting and unlogging for Ruby and JavaScript files, but I would love to add functionality for other languages!
-
 #### Adding regexps
-If you would like to add a regular expression for removing comments/logs from files of a different language, open up `app/controllers/concerns/remover.rb` and add the corresponding regexp to the `patterns` module method. In order for the app to select the proper algorithm, keys of the pattern hash must follow the convention of `<action>.<extension>` i.e., `uncomment.rb`
+If you would like to add a regular expression for removing comments/logs from files of a different language, regexps can be added to `Remover.patterns` in `app/controllers/concerns/remover.rb`. In order to select the proper algorithm, keys of the patterns hash must follow the convention of `<action>.<extension>` i.e., `uncomment.rb`
 
 #### An example of an added regexp
 ```ruby
@@ -31,7 +29,7 @@ If you would like to add a regular expression for removing comments/logs from fi
 ```
 
 #### Stretch
-It would be amazing to be able to upload a rails project directory and recursively remove all comments/logs from all its .rb and .js files. I have been able to zip and unzip uploaded directories but am having trouble figuring out how to zip nested directories in order to send a .zip file back to the user. It would be amazing to get this feature working, I could really use that functionality!
+It would be amazing to be able to upload a rails project directory and remove all comments/logs from all its .rb and .js files. I have been able to zip and unzip uploaded directories but am having trouble figuring out how deal with zipping nested directories. It would be great to figure this out.
 
 
 
