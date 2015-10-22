@@ -21,10 +21,12 @@ function uploadFile() {
 }
 
 function fileSelectMenu() {
-  $('.options').show();
   var path = $(event.target).val().split('\\');
-  $('#uploadFileBtn').text(path[path.length -1]);
-  $('#uploadFileBtn').addClass('filename');
+  if ($(event.target).val() !== '') {
+    $('#uploadFileBtn').text(path[path.length -1]);
+    $('.options').show();
+    $('#uploadFileBtn').addClass('filename'); 
+  }
 }
 
 function upload() {
