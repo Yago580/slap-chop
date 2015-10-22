@@ -24,13 +24,9 @@ function fileSelectMenu() {
   var path = $(event.target).val().split('\\');
   if ($(event.target).val() !== '') {
     $('#uploadFileBtn').text(path[path.length -1]);
-    $('.options').show();
     $('#uploadFileBtn').addClass('filename'); 
+    $('.options').fadeIn('slow');
   }
-}
-
-function upload() {
-  $('#file').trigger('click');
 }
 
 function uncomment() {
