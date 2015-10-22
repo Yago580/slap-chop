@@ -16,9 +16,15 @@
 //= require_tree .
 
 
-function displayFilename() {
+function uploadFile() {
+  $('#file').trigger('click');
+}
+
+function fileSelectMenu() {
+  $('.options').show();
   var path = $(event.target).val().split('\\');
-  $('#uploadFile').attr('placeholder', path[path.length - 1]);  
+  $('#uploadFileBtn').text(path[path.length -1]);
+  $('#uploadFileBtn').addClass('filename');
 }
 
 function upload() {

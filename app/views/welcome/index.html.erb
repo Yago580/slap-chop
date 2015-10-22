@@ -1,13 +1,14 @@
-<div class="uploader" hidden>
-  <%= form_tag({action: :upload}, multipart: true) do %>
-    <%= file_field_tag 'file', onchange: "displayFilename()" %>
-    <%= submit_tag 'uncomment', name: 'removal_type', id: 'uncomment' %>
-    <%= submit_tag 'unlog', name: 'removal_type', id: 'unlog' %>
-  <% end %>
-</div>
+<div class="center">
+    <div class="uploader" hidden>
+        <%= form_tag({action: :upload}, multipart: true) do %>
+            <%= file_field_tag 'file', onchange: "fileSelectMenu()" %>
+            <%= submit_tag 'uncomment', name: 'removal_type', id: 'uncomment' %>
+            <%= submit_tag 'unlog', name: 'removal_type', id: 'unlog' %>
+        <% end %>
+    </div>
+    <br>
 
-<button id="uploadFileBtn" onclick="upload()">
-  <input id="uploadFile" placeholder="Choose File" disabled="disabled" />
-</button>
-<button id="uncommentBtn" onclick="uncomment()">Uncomment</button>
-<button id="unlogBtn" onclick="unlog()">Unlog</button>
+    <button id="uploadFileBtn" class="btn file-preview" onclick="uploadFile()">Choose File</button>
+    <button id="uncommentBtn" class="btn options" onclick="uncomment()" hidden>Uncomment</button>
+    <button id="unlogBtn" class="btn options" onclick="unlog()" hidden>Unlog</button>
+</div>

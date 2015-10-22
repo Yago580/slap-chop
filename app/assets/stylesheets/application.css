@@ -14,22 +14,44 @@
  *= require_self
  */
 
+/** {
+    border: 2px solid red;
+}*/
 
-
-.fileUpload {
-    position: relative;
-    overflow: hidden;
-    margin: 10px;
-}
-
-.fileUpload input.upload {
+div.center{
+    bottom: 0;
+    height: 200px;
+    left: 0;
+    margin: auto;
     position: absolute;
     top: 0;
     right: 0;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
+    width: 650px;
+    text-align: center;
+}
+
+.btn{
+    font-family: 'Courier New';
+    border: none;
+    padding: 10px 10px;
+    text-align: center;
+    background-color: white;
+    font-size: 2em;
+    outline: none;
+}
+
+
+
+.btn:hover{
+    font-weight: bolder;
+}
+
+
+.btn.file-preview{
+    width: 100%;
+}
+
+.filename{
+    color: #FF6961;
+    font-size: 3em;
 }
